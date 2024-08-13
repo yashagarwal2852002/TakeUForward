@@ -2,6 +2,18 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Dashboard.css';
 
+// Utility function to convert ISO date to datetime-local format
+const convertToLocalDateTime = (isoDate) => {
+    if (!isoDate) return '';
+    const date = new Date(isoDate);
+    const year = date.getFullYear();
+    const month = (`0${date.getMonth() + 1}`).slice(-2);
+    const day = (`0${date.getDate()}`).slice(-2);
+    const hours = (`0${date.getHours()}`).slice(-2);
+    const minutes = (`0${date.getMinutes()}`).slice(-2);
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
+};
+
 const Dashboard = () => {
     const [bannerData, setBannerData] = useState({
         description: '',
@@ -12,16 +24,29 @@ const Dashboard = () => {
 
     useEffect(() => {
         axios.get('http://localhost:5000/api/banner').then(response => {
-            setBannerData(response.data);
+            const formattedEndDate = convertToLocalDateTime(response.data.endDate);
+            setBannerData({
+                ...response.data,
+                endDate: formattedEndDate
+            });
         }).catch(error => console.error('Error fetching banner data:', error));
     }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setBannerData(prev => ({
-            ...prev,
-            [name]: value
-        }));
+        if (name === 'endDate') {
+            // Convert the value to ISO format for storage
+            const isoDate = new Date(value).toISOString();
+            setBannerData(prev => ({
+                ...prev,
+                [name]: isoDate
+            }));
+        } else {
+            setBannerData(prev => ({
+                ...prev,
+                [name]: value
+            }));
+        }
     };
 
     const handleToggle = () => {
@@ -32,7 +57,6 @@ const Dashboard = () => {
     };
 
     const handleSubmit = (e) => {
-        console.log(bannerData);
         e.preventDefault();
         axios.post('http://localhost:5000/api/banner', bannerData)
             .then(response => alert('Banner updated successfully!'))
@@ -40,8 +64,8 @@ const Dashboard = () => {
     };
 
     return (
-        <div>
-            <h2>Banner Dashboard</h2>
+        <div className='dashboard'>
+            <h2>Internal Banner Dashboard</h2>
             <form onSubmit={handleSubmit}>
                 <label>
                     Banner Description:
@@ -66,9 +90,9 @@ const Dashboard = () => {
                 <label>
                     Banner End Date:
                     <input
-                        type="datetime-local"  // Use datetime-local input type for endDate
+                        type="datetime-local"
                         name="endDate"
-                        value={bannerData.endDate}
+                        value={convertToLocalDateTime(bannerData.endDate)}
                         onChange={handleChange}
                     />
                 </label>

@@ -1,0 +1,46 @@
+.banner{
+    background-color: #5681d2;
+    width: 55%;
+    margin: auto;
+    border-radius: 15px;
+    text-align: center;
+    user-select: none;
+    cursor: pointer;
+}
+
+.description{
+    font-size: 40px;
+    font-weight: 700;
+    padding: 20px;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.timer{
+    display: inline-flex;
+    justify-content: center;
+    background: black;
+    color: white;
+    width: 80%;
+    padding: 30px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    user-select: none;
+}
+
+.box{
+    font-size: 60px;
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+.box div:nth-child(1){
+    font-size: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.box div:nth-child(2){
+    font-weight: bold;
+    font-size: 17px;
+    color: #676767;
+}

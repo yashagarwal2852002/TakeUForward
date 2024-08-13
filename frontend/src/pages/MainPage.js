@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Banner from '../components/Banner.js';
+import { Link } from 'react-router-dom';
+import './MainPage.css';
 
 const MainPage = () => {
     const [bannerData, setBannerData] = useState({
@@ -10,14 +12,8 @@ const MainPage = () => {
         isVisible: false
     });
 
-    
-      
-
     const fetchData = async()=>{
         const {data} = await axios.get('http://localhost:5000/api/banner');
-        console.log(data);
-
-        // Update the state with the fetched data
         setBannerData({
             description: data.description,
             link: data.link,
@@ -27,17 +23,6 @@ const MainPage = () => {
     }
 
     useEffect(() => {
-        // const {data} = await axios.get('http://localhost:5000/api/banner');
-        // axios.get('http://localhost:5000/api/banner').then(response => {
-        //     // Ensure the endDate is a valid date string
-        //     console.log(response.data);
-        //     setBannerData({
-        //         description: response.data.description,
-        //         link: response.data.link,
-        //         endDate: response.data.endDate,
-        //         isVisible: response.data.isVisible
-        //     });
-        // }).catch(error => console.error('Error fetching banner data:', error));
         fetchData();
     }, []);
 
@@ -47,7 +32,9 @@ const MainPage = () => {
 
     return (
         <div>
-            <h1>Welcome to Our Website</h1>
+            <Link to="/dashboard">
+                <button>Dashboard</button>
+            </Link>
             <Banner
                 description={bannerData.description}
                 link={bannerData.link}

@@ -1,0 +1,85 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+.dashboard {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.dashboard h2 {
+    margin-top: 0;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #676767;
+    font-size: 30px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #555;
+}
+
+input[type="text"],
+input[type="datetime-local"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 15px;
+    box-sizing: border-box;
+    outline: 2px solid transparent; /* Default outline */
+    transition: outline-color 0.3s ease; /* Smooth transition for outline color */
+}
+
+input[type="text"]:focus,
+input[type="datetime-local"]:focus {
+    outline-color: #1d9bf0; /* Blue outline on focus */
+    border-color: #1d9bf0; /* Optional: Adjust border color on focus */
+}
+
+input[type="checkbox"] {
+    margin-top: 5px;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button:active {
+    background-color: #004080;
+}
+
+@media (max-width: 600px) {
+    div {
+        padding: 15px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+}
