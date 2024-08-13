@@ -13,7 +13,7 @@ const MainPage = () => {
     });
 
     const fetchData = async()=>{
-        const {data} = await axios.get('http://localhost:5000/api/banner');
+        const {data} = await axios.get('/api/banner');
         setBannerData({
             description: data.description,
             link: data.link,
