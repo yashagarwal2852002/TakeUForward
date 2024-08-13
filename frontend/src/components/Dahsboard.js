@@ -23,7 +23,7 @@ const Dashboard = () => {
     });
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api/banner').then(response => {
+        axios.get('/api/banner').then(response => {
             const formattedEndDate = convertToLocalDateTime(response.data.endDate);
             setBannerData({
                 ...response.data,
@@ -58,7 +58,7 @@ const Dashboard = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:5000/api/banner', bannerData)
+        axios.post('/api/banner', bannerData)
             .then(response => alert('Banner updated successfully!'))
             .catch(error => console.error('Error updating banner:', error));
     };
